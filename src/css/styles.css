@@ -16,5 +16,39 @@ body {
   font: inherit;
   padding: 8px;
   max-width: 320px;
-  margin-bottom: 16px;
+  margin: 32px 0 16px 40px;
+}
+
+.backlight-frame {
+  display: block;
+  
+  /* margin-right: auto;
+  margin-left: auto; */
+  border: 1px solid #767676;
+  border-radius: 5px;
+}
+
+.backlight-frame:focus {
+  outline: none;
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 3px 0.7px #2196f3;
+}
+
+.country-item {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  list-style: none;
+}
+
+.country-title {
+  margin-left: 10px;
+}
+
+.countries-item {
+  list-style: none;
+}
+
+.countries-item:not(:last-child) {
+  margin-bottom: 10px;
 }
