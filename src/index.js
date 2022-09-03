@@ -22,24 +22,14 @@ function onSearchInput(evt) {
   };
 
   fetchMar(searchName)
-    .then((response) => {
-      if (!response.ok || response.status === 404) {
-        throw new Error(response.status);
-      }
-      return response.json();
-    })
     .then((country) => {
       if (country.length > 10) {
         Notify.success(`Too many matches found. Please enter a more specific name.`);
-      }
-      
-      if (country.length >= 2 && country.length <= 10) {
+      } else if (country.length >= 2 && country.length <= 10) {
         cleanCountryInfo();
-        console.log(country)
+        console.log(country);
         renderCardCountry(country);
-      }
-
-      if (country.length === 1) {
+      } else if (country.length === 1) {
         cleanCountryList();
         renderInfoCountries(country);
       }
@@ -66,14 +56,13 @@ function renderCardCountry(country) {
   countryListEl.insertAdjacentHTML('afterbegin', markup)
 };
 
-
 function renderInfoCountries(country) {
   const markups = country
     .map(({name, flags, capital, population, languages }) => {
       return `
         <ul class="cards-list">
           <li class="country-item">
-            <img class="country-svg" src = "${flags.svg}" alt = "Флаг ${name.official}" width = 40px height = 20px />
+            <img class="country-svg" src = "${flags.svg}" alt = "Флаг ${name.official}" width = 30px height = 20px />
             <h1 class="country-title">${name.official}</h1>
           </li>
           <li class="countries-item"><b>Capital:</b> ${capital}</li>
@@ -86,10 +75,6 @@ function renderInfoCountries(country) {
   countryInfoEl.insertAdjacentHTML('afterbegin', markups)
 };
 
-function onInputError(error) {
-    Notify.failure(`Oops, there is no country with that name`);
-};
-
 function cleanCountryList() {
   countryListEl.innerHTML = '';
 };
@@ -98,6 +83,9 @@ function cleanCountryInfo() {
   countryInfoEl.innerHTML = '';
 };
 
+function onInputError(error) {
+    Notify.failure(`Oops, there is no country with that name`);
+};
 
 // Додала клас для формлення input
 searchCountryInput.classList.add('backlight-frame');

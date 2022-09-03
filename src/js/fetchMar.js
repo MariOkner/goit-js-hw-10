@@ -3,9 +3,12 @@ const FIELDS = 'fields=name,capital,population,flags,languages';
 
 export function fetchMar(country) {
   return fetch(`${BASE_URL}${country}?${FIELDS}`)
-    .then(response => {
+      .then((response) => {
+      if (!response.ok || response.status === 404) {
+        throw new Error(response.status);
+      }
       return response.json();
-    })      
+    })
 };
 
 export default { fetchMar };
